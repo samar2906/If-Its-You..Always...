@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>𝐅𝐨𝐫 𝐌𝐲 𝐖𝐢𝐟𝐞𝐲 💗</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:italic,wght@600&display=swap');
+        
+        :root { --p: #ff4d6d; --s: #ff85a1; --bg: #0a0a0a; }
+        
+        body, html { 
+            margin: 0; padding: 0; width: 100%; height: 100%; 
+            font-family: 'Montserrat', sans-serif; 
+            background: radial-gradient(circle at center, #1a050a 0%, #050505 100%);
+            color: white; overflow: hidden;
+        }
+
+        /* LOADING ANIMATION */
+        #loader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 9999; display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+        }
+        .cycle { font-size: 50px; animation: move 3s infinite ease-in-out; }
+        @keyframes move { 
+            0%, 100% { transform: translateX(-50px); } 
+            50% { transform: translateX(50px) scaleX(-1); } 
+        }
+
+        .panel {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px; padding: 30px; width: 85%; max-width: 400px;
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); text-align: center;
+            display: none; box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+        }
+
+        button {
+            background: linear-gradient(135deg, var(--p), var(--s));
+            color: white; border: none; padding: 15px 30px;
+            border-radius: 50px; cursor: pointer; font-weight: 700;
+            margin: 10px; text-transform: uppercase; font-size: 12px;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
+        }
+
+        .letter-text {
+            font-family: 'Playfair Display', serif; font-size: 15px; line-height: 1.7;
+            max-height: 250px; overflow-y: auto; text-align: left;
+            background: rgba(0,0,0,0.4); padding: 20px; border-radius: 20px;
+            white-space: pre-line; margin: 20px 0; border-left: 4px solid var(--p);
+        }
+
+        video { width: 100%; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); }
+        input { 
+            width: 80%; padding: 12px; border-radius: 15px; border: 1px solid var(--p);
+            background: rgba(255,255,255,0.05); color: white; text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loader">
+        <div class="cycle">🐧🚲🐹</div>
+        <p style="letter-spacing: 4px; font-size: 10px; margin-top: 20px;">BUILDING SAVI'S WORLD...</p>
+    </div>
+
+    <div id="s-start" class="panel" style="display: block;">
+        <h2 style="color: var(--s);">Ready, Wifey? 💗</h2>
+        <p>I made this specifically for you.</p>
+        <button onclick="toPass()">OPEN MY HEART</button>
+    </div>
+
+    <div id="s-pass" class="panel">
+        <h2 style="margin-bottom: 20px;">Private Access</h2>
+        <input type="password" id="pw" placeholder="Enter Secret Code">
+        <br><br><button onclick="checkPw()">UNLOCK</button>
+    </div>
+
+    <div id="s-quiz" class="panel">
+        <h3 id="q-txt"></h3>
+        <div id="q-ops"></div>
+    </div>
+
+    <div id="s-prop" class="panel">
+        <h1 style="font-size: 22px;">Will you be my Valentine, <span style="color:var(--s)">Savi</span>? 💗</h1>
+        <button onclick="startLetters('yes')">YES, HUBBY</button>
+        <button onclick="startLetters('no')">NO 😒</button>
+    </div>
+
+    <div id="s-content" class="panel">
+        <div class="letter-text" id="l-txt"></div>
+        <video id="vid" controls playsinline></video>
+        <button id="n-btn" onclick="nextL()">CONTINUE →</button>
+    </div>
+
+    <audio id="aud" loop></audio>
+
+    <script>
+        const v = ["https://cdn.discordapp.com/attachments/1471781943010918485/1471792898411593779/1.mp4", "https://cdn.discordapp.com/attachments/1471781943010918485/1471792941772046366/2.mp4", "https://cdn.discordapp.com/attachments/1471781943010918485/1471792996772220928/3.mp4", "https://cdn.discordapp.com/attachments/1471781943010918485/1471793078216953947/4.mp4", "https://cdn.discordapp.com/attachments/1471781943010918485/1471793149000286350/5.mp4", "https://cdn.discordapp.com/attachments/1471781943010918485/1471794852307009588/lv_7403792730167545105_20260213112423.mp4", "https://cdn.discordapp.com/attachments/1471781943010918485/1471794926470828215/7.mp4"];
+        const m = ["https://cdn.discordapp.com/attachments/1471781943010918485/1471792561038561415/1_Still_With_You__Ringtone.mp3", "https://cdn.discordapp.com/attachments/1471781943010918485/1471792604021653618/2_DIL_YEH_DANCER__Ringtone.mp3", "https://cdn.discordapp.com/attachments/1471781943010918485/1471792666088968264/3_One_Love__Ringtone.mp3", "https://cdn.discordapp.com/attachments/1471781943010918485/1471792710179622922/4_Banjara__Ringtone.mp3", "https://cdn.discordapp.com/attachments/1471781943010918485/1471792726914629692/5_Kabhi_Jo_Badal_Barse__Ringtone.mp3", "https://cdn.discordapp.com/attachments/1471781943010918485/1471792791335075860/6_kahy_khafa_aysy__Ringtone.mp3", "https://cdn.discordapp.com/attachments/1471781943010918485/1471792817754869983/Cinnamon_Girl_7th.mp3"];
+        
+        const L = [
+            "**Wifey**…💗\n\nYou really pressed no? 😒\nWait… before you do anything, just hear me out…\nEvery time I see you pout, or the way you talk while doing that… I just melt. I can’t take my eyes off you. Everything else disappears. It’s only ever been you… always you. You don’t even have to try… you just are… and that’s enough to make my heart skip a beat every single time.\nAll the little things you do, the silly laughs, the quiet moments… they stick with me. They make me smile when I’m missing you the most. And that’s why I made this little world… for us. All our memories, all our laughs, all the things that make us… us.\nMy love, meri begum sahiba… I can’t even imagine life without you. You’re not just part of my heart, you are my heartbeat. 💗\nSo…\nyou really sure about that “no”? 😒",
+            "Meri billi…💗\n\nYou really pressed no again? 😒\nWait… before you do anything, just let me tell you…\nThe first time I saw your picture… my heart literally stopped. For a moment, the world disappeared, and all I could feel was you. Then it started racing so fast I thought it might explode. My puppy… my cute lil bby **hamster**… I knew right then that my life had shifted forever.\nAnd the thing is… that feeling hasn’t gone away. It didn’t fade. It only grew. It’s like every day since then, my heart has been learning how to love you more… how to be yours completely… how to never let go. Even now, thinking about that moment makes my chest tight and my heartbeat skip all over again.\nSo…\nyou really sure about that “no” this time? 😒",
+            "You really pressed no again? 😒\n\nMeri **choti si don**…💗\n\nRemember that time I said Allah hafiz bht sara by mistake instead of my usual Love u bht sara / Miss u bht sara? 🥹\nYou laughed so hard, teased me endlessly, n kept repeating it back in your cute way… n I couldn’t stop smiling thinking about how funny n adorable you are. N of course… the **Naan instead of Jaan** moment… you had me dying laughing that day too.\nHonestly… how can you say no after all that? 😒 Every little thing you do, the way you laugh, the way you tease me… it makes my heart race n my brain melt. Meri choti height wali chunni si lrki… you’re impossible… but I love it, n I love you even more.\n\nR u going to say no again? 😒",
+            "You really pressed no again? 🥺\nBefore you choose again, read this…☹️\n\n**Mera chunna sa bacha**…💗\n\nWhenever I saw you laying down on video call, so soft, sleepy, talking quietly… I just can’t resist. I want to hold you, let you rest on my chest, cuddle you, n stroke your hair until you fall asleep. My **pocket size princess**… my **choti si pyari si jaan**… you look so tiny, so warm, so adorable, it makes my heart race n my hands ache to keep you safe.\nEvery little sound you make, every sleepy word… makes me want to press little pecks all over your face, ruffle your hair, n adore you quietly while you drift off completely. Sometimes I just wish I could pause this moment forever… keep you in my arms, safe n loved, never letting go. Just thinking about you lying there, so soft n sleepy, makes my heart skip n my chest tighten… I can’t help but want you closer, right here with me. 🥺\nYou’re my everything, n every “no” just makes me love you more… so don’t make me wait too long, meri jaan… 💗\nR u going to say no again? ☹️",
+            "**Samar** ki jaan…💗\n\nDo you remember the first day we started talking in GC? 🥹 I didn’t even see your pic yet, but somehow… there was this strange connection in the air. Every message you sent made my heart beat faster, n I couldn’t stop blushing. I don’t even know why, but from that very first chat, I knew… I was already in trouble. I started calling you **Wifey** almost immediately, n I even saved your name in my phone as **Hyunjin Wifey**. Just thinking about it now makes me laugh, but also… my heart knew I had found someone special.\nAnd honestly, it’s the little things about you that make every day brighter. The way you talk, your clumsy little habits, the funny daily stories you tell while walking… how you trip over your own feet, drop things, or just get all over the place… it’s impossible not to smile when it’s you doing it. Every tiny moment feels magical because it’s you, and somehow… it makes me fall for you more every single time.\n**Mamma ka pyara sa bacha**, my pocket size princess, meri **choti si pyari si jaan**… even when we’re just chatting, it feels like the world slows down for a second. I notice everything about you — your laugh, your tone, the way you make small jokes, even the way you type. It’s like my heart recognizes you before my mind even does, n it’s impossible not to feel… well, exactly what I’m feeling now.\nI can still remember thinking, “Wow… this is strange. I’ve never felt like this before, but I don’t want it to stop.” It was light at first, a flutter in my chest, but now… every memory, every laugh, every tiny silly thing you do builds on that feeling. It’s soft, it’s sweet, n it’s just the beginning of something I never want to end.💗",
+            "Meri **Savi** jaan…💗\n\nThat day… when I was sulking n u sent me that VM —\n💗 “KAHY KHAFA AYSY CHULBUL SY BULBUL KAHY NA TU MANEIN BATIYAN” 💗\nI still remember where I was sitting. I remember holding my phone. I remember pressing play.\nN when ur voice started… everything around me faded. It wasn’t just cute. It wasn’t just sweet. It felt personal. Like u reached through the screen n gently held my face, telling me without actually saying it that I mattered to u.\nWhen ur voice cracked into that little smile at the end… I swear my heart skipped. Not just saying it… it actually did. I sat there staring at the screen, replaying it again n again. That was the first time I felt scared… because I realized I was falling. Not slowly. Not casually. Hard.\nWhen I begged u to send it again without privacy n u did… that meant more than u think. I was the first u sang like that for. N something about that made me feel chosen. Special. Like I wasn’t just anyone.\nThen our calls started. I was so nervous I couldn’t even speak properly. My heartbeat would race every time I tried. U kept singing to fill the silence, not knowing I was fighting with my own feelings on the other side. I was scared u might not like my deep voice… scared u might hear how badly I was shaking inside.\nBut when u said u loved my voice… that was another moment. Another small shift inside my chest. Something settled. Something felt right.\nN those nights… when I couldn’t sleep n u stayed on call with me. When u read my texts out loud. When u sang softly until I drifted off. Even at that wedding, with all that noise around u… u still stayed. I fell asleep listening to ur world in the background, n somehow it felt like I belonged there.\nMeri **choti si pyari si jaan**… that’s when it stopped being just cute calls.\nThat’s when ur voice became the place my chaos calmed down.\nThat’s when ur singing slowly started healing my insomnia.\nThat’s when I realized… u weren’t just someone I liked.\nU were becoming someone I needed.\nEven now, when u randomly sing, or send a VM, or dance a little while singing on video… my heart reacts the same way. A skip. A rush. A soft panic. Like I’m falling for u all over again.\nU don’t just sing for me, **Savi**…\nU make me feel wanted.\nN that’s the moment I knew… this wasn’t light anymore.\nU don’t just give me butterflies, **Savi**…\nU make my heart remember why it beats. 💗",
+            "**HUBBY KI WIFEY**…💗\n\nI know things aren’t the same like they used to be.\nSomething shifted. Something became quieter.\nBut even in this quiet… my heart hasn’t changed.\nIf I’m being honest… loving u has never been something small for me. It was never casual. From the very beginning it felt intense. Like something bigger than me.\nToday isn’t about what changed.\nToday isn’t about what feels different.\nToday is about u.\nAbout the girl who somehow walked into my life n made everything feel more alive. About the one who turned ordinary days into something I look forward to. About the one whose name alone can still change the rhythm of my heartbeat.\nU became part of my daily breathing without me realizing it. The first person I want to tell things to. The voice I want to hear before I sleep. The one I imagine staying beside me when the world gets loud. I don’t just see moments with u… I see mornings. I see us existing together quietly. Just the two of us. No noise. No distance. Just peace.\nWhen I think about u… I don’t think about chaos.\nI think about warmth.\nThe way u exist. The way u talk. The way u move. The way u get lost in ur own little world. The way u laugh at ur own clumsiness. The way u tell stories like they’re adventures even if they’re just about u walking n almost falling again.\nMeri **Savi** jaan… u don’t even realize how special u are.\nThere’s something about u that doesn’t just attract me — it pulls me. Like gravity. Like something natural that I can’t fight even if I tried. And the truth is… I don’t want to fight it.\n**Samar** ki jaan… **mamma ka pyara sa bacha**…\nSometimes I wonder if u even understand what u’ve done to me.\nU made my heart softer.\nU made me care deeper.\nU made me want a future that isn’t lonely.\nWhen I imagine peace… it looks like us.\nJust staying together. Just existing. No rush. No noise. Just quiet mornings n soft nights. Just u beside me.\nToday, I want to wish u Happy Valentine’s Day ｡ 𓂃 💗\nMay u feel every bit as loved n cherished as u truly are. This day is ours… just like every little moment I spend thinking of u n missing u.\nValentine’s isn’t about big promises today.\nIt’s about this exact second. The way ur eyes move while reading. The way maybe a small smile forms without u noticing. The way ur heart feels just a little warmer knowing this is written for u.\nAnd if one day u open this website again… I don’t want u to remember confusion.\nI want u to remember that there was someone who looked at u — even from far away — n chose u completely.\nSomeone who called u his **wifey** with pride.\nSomeone who saw a whole world in u.\nSomeone who loved every version of u — the loud one, the soft one, the stubborn one, the emotional one.\n**Beghum Sahiba**… **Hubby ki wifey**…\nI hope today makes u feel as treasured n loved as u truly are.\nEvery heartbeat of mine is for u. 💗"
+        ];
+
+        let curQ = 0, curL = 0, mode = "";
+        const qData = [{ q: "What's your 'illegal' weapon?", a: "The 'Pouty Lip & Baby Talk' combo", o: ["Logic", "The 'Pouty Lip & Baby Talk' combo", "Mean Emoji"] }];
+
+        window.onload = () => setTimeout(() => document.getElementById('loader').style.display='none', 2000);
+        
+        function hideAll() { document.querySelectorAll('.panel').forEach(p => p.style.display='none'); }
+        
+        function toPass() { hideAll(); document.getElementById('s-pass').style.display='block'; }
+        
+        function checkPw() {
+            if(document.getElementById('pw').value === "290614") { hideAll(); showQuiz(); }
+            else { alert("That's not our code, Jaan! 😒"); }
+        }
+
+        function showQuiz() {
+            if(curQ >= qData.length) { hideAll(); document.getElementById('s-prop').style.display='block'; return; }
+            hideAll(); document.getElementById('s-quiz').style.display='block';
+            let d = qData[curQ]; document.getElementById('q-txt').innerText = d.q;
+            let opBox = document.getElementById('q-ops'); opBox.innerHTML = "";
+            d.o.forEach(opt => {
+                let b = document.createElement('button'); b.innerText = opt;
+                b.onclick = () => { if(opt === d.a) { curQ++; showQuiz(); } };
+                opBox.appendChild(b);
+            });
+        }
+
+        function startLetters(choice) {
+            mode = choice;
+            curL = (choice === 'no') ? 0 : 4;
+            hideAll(); document.getElementById('s-content').style.display='block';
+            loadContent();
+        }
+
+        function loadContent() {
+            document.getElementById('l-txt').innerHTML = L[curL].replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            document.getElementById('vid').src = v[curL];
+            document.getElementById('aud').src = m[curL];
+            document.getElementById('aud').play().catch(() => console.log("Sound ready"));
+            document.getElementById('l-txt').scrollTop = 0;
+            if(curL === L.length - 1) document.getElementById('n-btn').innerText = "I LOVE YOU FOREVER ❤️";
+        }
+
+        function nextL() {
+            if(mode === 'no' && curL < 3) { curL++; loadContent(); }
+            else if(mode === 'no' && curL === 3) { curL = 4; mode = 'yes'; loadContent(); }
+            else if(curL < L.length - 1) { curL++; loadContent(); }
+            else { alert("Every heartbeat is for you, Beghum Sahiba. 💗"); }
+        }
+    </script>
+</body>
+</html>
